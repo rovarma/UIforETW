@@ -22,7 +22,7 @@ limitations under the License.
 class CCPUFrequencyMonitor
 {
 public:
-	CCPUFrequencyMonitor();
+	CCPUFrequencyMonitor() noexcept;
 	~CCPUFrequencyMonitor();
 
 	// Start and stop the sampling threads so that they aren't running
@@ -52,7 +52,7 @@ private:
 
 	// The number of CPUs that we monitor - may be less than the actual number
 	// of CPUs on some crazy multi-core machines.
-	unsigned numCPUs_;
+	unsigned numCPUs_ = 0;
 	// Startup information for sampling threads.
 	std::vector<CPUSamplerState> threads_;
 
@@ -71,5 +71,7 @@ private:
 	HANDLE hExitEvent_ = nullptr;
 
 	CCPUFrequencyMonitor(const CCPUFrequencyMonitor&) = delete;
+	CCPUFrequencyMonitor(const CCPUFrequencyMonitor&&) = delete;
 	CCPUFrequencyMonitor& operator=(const CCPUFrequencyMonitor&) = delete;
+	CCPUFrequencyMonitor& operator=(const CCPUFrequencyMonitor&&) = delete;
 };

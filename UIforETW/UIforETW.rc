@@ -80,19 +80,19 @@ IDR_MAINFRAME           ICON                    "res\\UIforETW.ico"
 // Dialog
 //
 
-IDD_ABOUTBOX DIALOGEX 0, 0, 211, 82
+IDD_ABOUTBOX DIALOGEX 0, 0, 265, 82
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION
 CAPTION "About UI for ETW"
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    ICON            IDR_MAINFRAME,IDC_STATIC,14,14,20,20
+    ICON            IDR_MAINFRAME,IDC_STATIC,14,14,21,20
     CONTROL         "UI for ETW",IDC_STATIC,"Static",SS_LEFTNOWORDWRAP | SS_NOPREFIX | WS_GROUP,42,14,114,8
     CONTROL         "Copyright 2015 Google Inc. All Rights Reserved.",IDC_STATIC,
                     "Static",SS_LEFTNOWORDWRAP | WS_GROUP,42,26,162,8
-    DEFPUSHBUTTON   "OK",IDOK,154,61,50,14,WS_GROUP
+    DEFPUSHBUTTON   "OK",IDOK,208,61,50,14,WS_GROUP
     CONTROL         "Initially/mostly written by Bruce Dawson",IDC_STATIC,
                     "Static",SS_LEFTNOWORDWRAP | WS_GROUP,42,38,162,8
-    CONTROL         "Build date goes here",IDC_BUILDDATE,"Static",SS_LEFTNOWORDWRAP | WS_GROUP,42,50,134,8
+    CONTROL         "Build date goes here",IDC_BUILDDATE,"Static",SS_LEFTNOWORDWRAP | WS_GROUP,42,50,217,8
 END
 
 IDD_UIFORETW_DIALOG DIALOGEX 0, 0, 569, 221
@@ -101,9 +101,9 @@ EXSTYLE WS_EX_APPWINDOW
 CAPTION "UI for ETW"
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    PUSHBUTTON      "Start &Tracing (Ctrl+Win+C)",IDC_STARTTRACING,7,7,95,14
-    PUSHBUTTON      "Sa&ve Trace Buffers (Ctrl+Win+C)",IDC_SAVETRACEBUFFERS,105,7,115,14
-    PUSHBUTTON      "Sto&p Tracing",IDC_STOPTRACING,223,7,50,14
+    PUSHBUTTON      "Start &Tracing (Ctrl+Win+R)",IDC_STARTTRACING,7,7,95,14
+    PUSHBUTTON      "Sa&ve Trace Buffers (Ctrl+Win+R)",IDC_SAVETRACEBUFFERS,105,7,115,14
+    PUSHBUTTON      "Cance&l Tracing",IDC_STOPTRACING,223,7,56,14
     DEFPUSHBUTTON   "UnusedDefaultButton",IDC_UNUSEDDEFAULTBUTTON,287,7,84,14,NOT WS_VISIBLE
     PUSHBUTTON      "&Settings...",IDC_SETTINGS,399,7,50,14
     PUSHBUTTON      "About",IDC_ABOUT,455,7,50,14
@@ -125,7 +125,7 @@ BEGIN
     CONTROL         "Trace inform&ation:",IDC_STATIC,"Static",SS_LEFTNOWORDWRAP | WS_GROUP,239,135,69,8
     EDITTEXT        IDC_TRACENOTES,239,146,323,68,ES_MULTILINE | ES_WANTRETURN | WS_VSCROLL
     EDITTEXT        IDC_TRACENAMEEDIT,75,144,160,14,ES_AUTOHSCROLL | ES_WANTRETURN | NOT WS_VISIBLE | NOT WS_TABSTOP
-    CONTROL         "&CLR tracing",IDC_CLRTRACING,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,464,84,53,10
+    CONTROL         "CLR traci&ng",IDC_CLRTRACING,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,464,84,53,10
     CONTROL         "Trace size:",IDC_TRACESIZE,"Static",SS_LEFTNOWORDWRAP | WS_GROUP,94,135,76,8
 END
 
@@ -197,7 +197,7 @@ BEGIN
             VALUE "InternalName", "UIforETW.exe"
             VALUE "LegalCopyright", "RandomASCII"
             VALUE "OriginalFilename", "UIforETW.exe"
-            VALUE "ProductName", "TODO: <Product name>"
+            VALUE "ProductName", "UI for ETW"
             VALUE "ProductVersion", "1.0.0.1"
         END
     END
@@ -219,7 +219,7 @@ BEGIN
     IDD_ABOUTBOX, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 204
+        RIGHTMARGIN, 258
         TOPMARGIN, 7
         BOTTOMMARGIN, 75
     END

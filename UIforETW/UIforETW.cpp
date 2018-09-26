@@ -29,7 +29,6 @@ namespace {
 
 struct HMODULEhelper
 {
-
 	HMODULE hModule;
 
 	HMODULEhelper(_In_z_ PCSTR const moduleName)
@@ -51,6 +50,10 @@ struct HMODULEhelper
 		ATLVERIFY( FreeLibrary(hModule) );
 	}
 
+	HMODULEhelper(const HMODULEhelper&) = delete;
+	HMODULEhelper(const HMODULEhelper&&) = delete;
+	HMODULEhelper& operator=(const HMODULEhelper&) = delete;
+	HMODULEhelper& operator=(const HMODULEhelper&&) = delete;
 };
 
 typedef BOOL(WINAPI* SetProcessMitigationPolicy_t)(\
@@ -129,16 +132,14 @@ void enableAggressiveProcessMitigations()
 	}
 
 	HMODULEhelper kern32("kernel32.dll");
-	PVOID const address =
-		reinterpret_cast<PVOID>(GetProcAddress(kern32.hModule, "SetProcessMitigationPolicy"));
-	if (address == NULL)
+	const SetProcessMitigationPolicy_t SetProcessMitigationPolicy_f =
+		reinterpret_cast<SetProcessMitigationPolicy_t>(GetProcAddress(kern32.hModule, "SetProcessMitigationPolicy"));
+	if (SetProcessMitigationPolicy_f == NULL)
 	{
 		const DWORD lastErr = GetLastError();
 		ATLTRACE(L"Failed to get address of SetProcessMitigationPolicy! Error code: %u\r\n", lastErr);
 		return;
 	}
-	const SetProcessMitigationPolicy_t SetProcessMitigationPolicy_f =
-		reinterpret_cast<SetProcessMitigationPolicy_t>(address);
 	enableASLRMitigation(SetProcessMitigationPolicy_f);
 	enableExtensionPointMitigations(SetProcessMitigationPolicy_f);
 	enableStrictHandleCheckingMitigations(SetProcessMitigationPolicy_f);
@@ -156,7 +157,7 @@ END_MESSAGE_MAP()
 
 // CUIforETWApp construction
 
-CUIforETWApp::CUIforETWApp()
+CUIforETWApp::CUIforETWApp() noexcept
 {
 	// support Restart Manager
 	m_dwRestartManagerSupportFlags = AFX_RESTART_MANAGER_SUPPORT_RESTART;
@@ -200,7 +201,7 @@ BOOL CUIforETWApp::InitInstance()
 	{
 		CUIforETWDlg dlg;
 		m_pMainWnd = &dlg;
-		INT_PTR nResponse = dlg.DoModal();
+		const INT_PTR nResponse = dlg.DoModal();
 		if (nResponse == -1)
 		{
 			ATLTRACE("Warning: dialog creation failed, "
@@ -217,7 +218,7 @@ BOOL CUIforETWApp::InitInstance()
 	return FALSE;
 }
 
-void CUIforETWApp::OnHelp()
+void CUIforETWApp::OnHelp() noexcept
 {
 	ShellExecute(NULL, NULL, L"https://randomascii.wordpress.com/2015/04/14/uiforetw-windows-performance-made-easier/", NULL, NULL, SW_SHOWNORMAL);
 }
