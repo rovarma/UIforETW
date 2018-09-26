@@ -538,13 +538,13 @@ BOOL CUIforETWDlg::OnInitDialog()
 		OutputDebugStringA("Failed to find My Documents directory.\r\n");
 		exit(10);
 	}
-	std::wstring defaultTraceDir = documents + std::wstring(L"\\etwtraces\\");
+	std::wstring defaultTraceDir = L"D:\\etwtraces\\";
 	traceDir_ = GetDirectory(L"etwtracedir", defaultTraceDir);
 
 	// Copy over the startup profiles if they currently don't exist.
 	CopyStartupProfiles(GetExeDir(), false);
 
-	tempTraceDir_ = GetDirectory(L"temp", traceDir_);
+	tempTraceDir_ = traceDir_ + L"\\temp\\";
 
 	SetSymbolPath();
 
